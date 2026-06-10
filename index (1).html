@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChargeBid — Presentazione Investitori</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #050f1a;
+  --navy2: #0a1f33;
+  --electric: #00c5ff;
+  --lime: #8bff47;
+  --white: #f5f8fa;
+  --muted: #7a92a8;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(0,197,255,0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── NOISE TEXTURE OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.35;
+}
+
+section, nav, footer { position: relative; z-index: 1; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 60px;
+  background: rgba(5,15,26,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Space Mono', monospace;
+  font-size: 18px; font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+
+.nav-logo span { color: var(--electric); }
+
+.nav-links { display: flex; gap: 36px; }
+.nav-links a {
+  font-size: 13px; font-weight: 500; letter-spacing: 0.05em;
+  color: var(--muted); text-decoration: none; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--electric); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 140px 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 60% at 75% 50%, rgba(0,197,255,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(139,255,71,0.04) 0%, transparent 60%);
+}
+
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0,197,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,197,255,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+}
+
+.hero-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: var(--electric); letter-spacing: 0.15em;
+  text-transform: uppercase; margin-bottom: 24px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-tag::before {
+  content: ''; width: 32px; height: 1px; background: var(--electric);
+}
+
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(52px, 6vw, 88px);
+  line-height: 1.0; font-weight: 400;
+  max-width: 800px; margin-bottom: 32px;
+}
+
+.hero h1 em {
+  font-style: italic; color: var(--electric);
+}
+
+.hero-sub {
+  font-size: 18px; color: var(--muted); max-width: 520px;
+  line-height: 1.7; margin-bottom: 52px;
+}
+
+.hero-cta {
+  display: flex; gap: 16px; align-items: center;
+}
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--electric); color: var(--navy);
+  font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+  padding: 14px 28px; border-radius: 2px;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: #33d1ff; transform: translateY(-2px); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--muted); font-size: 13px; text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.1); padding: 13px 24px; border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--electric); color: var(--white); }
+
+.hero-stats {
+  position: relative; z-index: 1;
+  display: flex; gap: 0; margin-top: 80px;
+  border-top: 1px solid var(--border);
+  padding-top: 40px;
+}
+
+.hero-stat {
+  flex: 1; padding-right: 40px; border-right: 1px solid var(--border);
+}
+.hero-stat:last-child { border-right: none; padding-right: 0; padding-left: 40px; }
+.hero-stat:not(:first-child) { padding-left: 40px; }
+
+.stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 42px; color: var(--electric); line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label { font-size: 12px; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* ─── SECTIONS ─── */
+section { padding: 100px 60px; }
+
+.section-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; color: var(--electric); letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 3.5vw, 52px); font-weight: 400;
+  line-height: 1.15; margin-bottom: 20px;
+}
+
+.section-intro {
+  font-size: 17px; color: var(--muted); max-width: 560px; line-height: 1.7;
+  margin-bottom: 60px;
+}
+
+/* ─── PROBLEM ─── */
+.problem { background: var(--navy2); }
+
+.problem-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+}
+
+.problem-card {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 40px; position: relative; overflow: hidden;
+}
+
+.problem-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--electric), transparent);
+}
+
+.problem-card h3 {
+  font-family: 'DM Serif Display', serif; font-size: 22px;
+  margin-bottom: 12px; color: var(--white);
+}
+.problem-card p { font-size: 15px; color: var(--muted); line-height: 1.7; }
+
+.problem-icon {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: var(--electric); letter-spacing: 0.1em;
+  margin-bottom: 20px; display: block;
+}
+
+/* ─── SOLUTION ─── */
+.solution-layout {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start;
+}
+
+.marketplace-diagram {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 4px; padding: 40px;
+  display: flex; flex-direction: column; gap: 0;
+}
+
+.diagram-row {
+  display: flex; align-items: center; gap: 0;
+}
+
+.actor-box {
+  flex: 1; text-align: center; padding: 20px 16px;
+  border: 1px solid var(--border); border-radius: 4px;
+  background: rgba(0,197,255,0.04);
+}
+
+.actor-box .actor-title {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  color: var(--electric); letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+
+.actor-box p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+.platform-center {
+  flex: 1.2; text-align: center; padding: 24px 16px;
+  border: 1px solid var(--electric);
+  border-radius: 4px; background: rgba(0,197,255,0.06);
+  margin: 0 -1px; z-index: 1;
+}
+
+.platform-center .platform-name {
+  font-family: 'DM Serif Display', serif; font-size: 20px;
+  color: var(--electric); margin-bottom: 8px;
+}
+
+.platform-center ul {
+  list-style: none; text-align: left;
+  font-size: 11px; color: var(--muted); line-height: 2;
+}
+.platform-center ul li::before { content: '→ '; color: var(--electric); }
+
+.arrow-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; padding: 10px 0;
+}
+
+.arrow-label {
+  font-size: 10px; color: var(--muted); letter-spacing: 0.08em;
+  flex: 1; text-align: center;
+}
+
+.arrow-mid {
+  flex: 1.2; text-align: center;
+  font-size: 18px; color: var(--electric);
+}
+
+.features-list { display: flex; flex-direction: column; gap: 24px; }
+
+.feature-item {
+  display: flex; gap: 20px; align-items: flex-start;
+  padding: 24px; border: 1px solid var(--border);
+  border-radius: 4px; background: var(--card);
+  transition: border-color 0.2s;
+}
+.feature-item:hover { border-color: rgba(0,197,255,0.4); }
+
+.feature-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: var(--electric); letter-spacing: 0.1em;
+  padding-top: 3px; white-space: nowrap;
+}
+
+.feature-item h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.feature-item p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ─── NEW SECTION: THREE MARKET SIDES ─── */
+.three-sides { background: var(--navy2); }
+
+.sides-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  border: 1px solid var(--border);
+}
+
+.side-card {
+  padding: 44px 36px; background: var(--card);
+  border-right: 1px solid var(--border); position: relative;
+}
+.side-card:last-child { border-right: none; }
+
+.side-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+}
+.side-card:nth-child(1)::after { background: linear-gradient(90deg, var(--electric), transparent); }
+.side-card:nth-child(2)::after { background: linear-gradient(90deg, var(--lime), transparent); }
+.side-card:nth-child(3)::after { background: linear-gradient(90deg, #ff9500, transparent); }
+
+.side-num {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 14px; display: block;
+}
+.side-card:nth-child(1) .side-num { color: var(--electric); }
+.side-card:nth-child(2) .side-num { color: var(--lime); }
+.side-card:nth-child(3) .side-num { color: #ff9500; }
+
+.side-card h3 {
+  font-family: 'DM Serif Display', serif; font-size: 24px;
+  margin-bottom: 14px; line-height: 1.2;
+}
+
+.side-card p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+
+.side-card ul {
+  list-style: none; display: flex; flex-direction: column; gap: 8px;
+}
+
+.side-card ul li {
+  font-size: 13px; color: var(--muted); padding-left: 16px; position: relative;
+}
+
+.side-card:nth-child(1) ul li::before { content: '→'; position: absolute; left: 0; color: var(--electric); }
+.side-card:nth-child(2) ul li::before { content: '→'; position: absolute; left: 0; color: var(--lime); }
+.side-card:nth-child(3) ul li::before { content: '→'; position: absolute; left: 0; color: #ff9500; }
+
+/* ─── MARKET ─── */
+.market-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+}
+
+.tam-visual {
+  position: relative; display: flex; flex-direction: column; gap: 12px;
+}
+
+.tam-ring {
+  padding: 28px 32px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.tam-ring.tam { background: rgba(0,197,255,0.08); border: 1px solid rgba(0,197,255,0.3); }
+.tam-ring.sam { background: rgba(0,197,255,0.13); border: 1px solid rgba(0,197,255,0.5); margin: 0 24px; }
+.tam-ring.som { background: rgba(139,255,71,0.1); border: 1px solid rgba(139,255,71,0.5); margin: 0 48px; }
+
+.tam-label {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 4px;
+}
+
+.tam-value {
+  font-family: 'DM Serif Display', serif; font-size: 28px;
+  color: var(--electric);
+}
+.som .tam-value { color: var(--lime); }
+
+.tam-desc { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+.market-points { display: flex; flex-direction: column; gap: 28px; }
+
+.market-point {
+  border-left: 2px solid var(--border); padding-left: 24px;
+  transition: border-color 0.2s;
+}
+.market-point:hover { border-left-color: var(--electric); }
+
+.market-point h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.market-point p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* ─── REVENUE ─── */
+.revenue { background: var(--navy2); }
+
+.revenue-streams {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  margin-bottom: 60px;
+}
+
+.rev-card {
+  padding: 36px; background: var(--card); border: 1px solid var(--border);
+  position: relative;
+}
+
+.rev-card::before {
+  content: attr(data-num);
+  position: absolute; top: 24px; right: 24px;
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  color: var(--border); letter-spacing: 0.1em;
+}
+
+.rev-card h4 {
+  font-family: 'DM Serif Display', serif; font-size: 20px;
+  margin-bottom: 10px; color: var(--white);
+}
+
+.rev-card .rev-amount {
+  font-family: 'Space Mono', monospace; font-size: 13px;
+  color: var(--electric); margin-bottom: 14px;
+}
+
+.rev-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+.ltv-bar {
+  background: var(--card); border: 1px solid var(--border);
+  padding: 40px; display: flex; gap: 60px; align-items: center;
+}
+
+.ltv-metric { flex: 1; }
+.ltv-metric .ltv-val {
+  font-family: 'DM Serif Display', serif; font-size: 48px;
+  color: var(--lime); line-height: 1;
+}
+.ltv-metric .ltv-label { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+.ltv-divider { width: 1px; background: var(--border); align-self: stretch; }
+
+/* ─── PROJECTIONS ─── */
+.chart-container { margin-top: 0; }
+
+.proj-bars {
+  display: flex; align-items: flex-end; gap: 24px; height: 220px;
+  margin-bottom: 16px;
+}
+
+.proj-bar-wrap {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; height: 100%; justify-content: flex-end;
+}
+
+.proj-bar {
+  width: 100%; border-radius: 2px 2px 0 0;
+  background: linear-gradient(to top, var(--electric), rgba(0,197,255,0.3));
+  position: relative; transition: opacity 0.2s;
+}
+.proj-bar:hover { opacity: 0.85; }
+
+.proj-bar.highlight {
+  background: linear-gradient(to top, var(--lime), rgba(139,255,71,0.4));
+}
+
+.proj-bar-val {
+  position: absolute; top: -24px; left: 50%; transform: translateX(-50%);
+  font-family: 'Space Mono', monospace; font-size: 10px; color: var(--white);
+  white-space: nowrap;
+}
+
+.proj-labels {
+  display: flex; gap: 24px; border-top: 1px solid var(--border); padding-top: 12px;
+}
+.proj-label {
+  flex: 1; text-align: center;
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  color: var(--muted);
+}
+
+/* ─── ROADMAP ─── */
+.roadmap-timeline {
+  display: flex; gap: 0; position: relative;
+}
+
+.roadmap-timeline::before {
+  content: '';
+  position: absolute; top: 28px; left: 0; right: 0; height: 1px;
+  background: var(--border);
+}
+
+.roadmap-step {
+  flex: 1; padding-top: 20px; position: relative; padding-right: 16px;
+}
+
+.roadmap-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid var(--border); background: var(--navy);
+  margin-bottom: 24px; position: relative; z-index: 1;
+}
+
+.roadmap-step.done .roadmap-dot {
+  background: var(--electric); border-color: var(--electric);
+}
+
+.roadmap-step.active .roadmap-dot {
+  background: var(--lime); border-color: var(--lime);
+  box-shadow: 0 0 12px rgba(139,255,71,0.5);
+}
+
+.roadmap-step.future .roadmap-dot {
+  background: transparent; border-color: rgba(255,255,255,0.2);
+}
+
+.roadmap-date {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  color: var(--electric); letter-spacing: 0.1em; margin-bottom: 6px;
+}
+
+.roadmap-step.future .roadmap-date { color: var(--muted); }
+.roadmap-step.active .roadmap-date { color: var(--lime); }
+
+.roadmap-step h4 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.roadmap-step p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ─── CTA ─── */
+.cta-section {
+  text-align: center; padding: 120px 60px;
+  background: var(--navy2);
+  position: relative; overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,197,255,0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.cta-section .section-title { max-width: 600px; margin: 0 auto 16px; }
+.cta-section .section-intro { margin: 0 auto 48px; text-align: center; }
+
+.contact-grid {
+  display: flex; gap: 60px; justify-content: center;
+  margin-top: 60px; padding-top: 60px; border-top: 1px solid var(--border);
+}
+
+.contact-item { text-align: center; }
+.contact-label { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+.contact-val { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--electric); }
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 32px 60px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.footer-logo {
+  font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700;
+  color: var(--white);
+}
+.footer-logo span { color: var(--electric); }
+
+.footer-note { font-size: 12px; color: var(--muted); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero > * { animation: fadeUp 0.7s ease both; }
+.hero-tag { animation-delay: 0.1s; }
+.hero h1  { animation-delay: 0.2s; }
+.hero-sub { animation-delay: 0.35s; }
+.hero-cta { animation-delay: 0.5s; }
+.hero-stats { animation-delay: 0.65s; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  section { padding: 60px 24px; }
+  .hero { padding: 120px 24px 60px; }
+  .hero-stats { flex-direction: column; gap: 24px; }
+  .hero-stat { border-right: none; border-bottom: 1px solid var(--border); padding: 0 0 24px; }
+  .hero-stat:last-child { border-bottom: none; padding-left: 0; }
+  .hero-stat:not(:first-child) { padding-left: 0; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .solution-layout { grid-template-columns: 1fr; gap: 40px; }
+  .sides-grid { grid-template-columns: 1fr; }
+  .side-card { border-right: none; border-bottom: 1px solid var(--border); }
+  .market-layout { grid-template-columns: 1fr; }
+  .revenue-streams { grid-template-columns: 1fr; }
+  .ltv-bar { flex-direction: column; gap: 32px; }
+  .ltv-divider { width: 100%; height: 1px; }
+  .roadmap-timeline { flex-direction: column; gap: 32px; }
+  .roadmap-timeline::before { display: none; }
+  .contact-grid { flex-direction: column; gap: 32px; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">charge<span>bid</span></div>
+  <div class="nav-links">
+    <a href="#problem">Problema</a>
+    <a href="#solution">Soluzione</a>
+    <a href="#market">Mercato</a>
+    <a href="#revenue">Ricavi</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#contact">Contatti</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-tag">Presentazione Investitori — Aprile 2026</div>
+
+  <h1>Infrastruttura di ricarica EV:<br>la risposta europea<br>alla <em>dipendenza energetica</em></h1>
+
+  <p class="hero-sub">ChargeBid è il primo marketplace intelligente che connette proprietari immobiliari e operatori di ricarica EV. Con il Brent a 100$/barile e il gas TTF a 72€/MWh, accelerare la transizione elettrica non è più solo una scelta strategica — è una necessità geopolitica.</p>
+
+  <div class="hero-cta">
+    <a href="#solution" class="btn-primary">Scopri la Piattaforma →</a>
+    <a href="#contact" class="btn-ghost">Richiedi un Incontro</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="stat-num">€47B</div>
+      <div class="stat-label">Mercato totale indirizzabile</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">5,9M</div>
+      <div class="stat-label">Gap punti di ricarica entro il 2030</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">69×</div>
+      <div class="stat-label">Crescita ricavi 2027–2035</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">€31,6M</div>
+      <div class="stat-label">Ricavi proiettati al 2035</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="section-tag">01 — Il Problema</div>
+  <h2 class="section-title">Un processo rotto in un momento<br>di emergenza energetica globale</h2>
+  <p class="section-intro">Lo shock Iran 2026 ha reso la transizione elettrica non più rinviabile. Brent a 100$/barile, TTF a 72€/MWh: chi guida EV oggi è immune. Chi dipende da idrocarburi paga ogni giorno il costo della dipendenza.</p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <span class="problem-icon">// Contesto Geopolitico — Aprile 2026</span>
+      <h3>Il più grande shock energetico della storia accelera tutto</h3>
+      <p>L'IEA ha definito la crisi iraniana la più grande interruzione dell'offerta nella storia dei mercati energetici. Il Brent ha superato i 100$/barile (+50% da gennaio 2026), il TTF i 72€/MWh. L'Italia rischia 10 miliardi di costi energetici aggiuntivi nel 2026. ChargeBid è infrastruttura di sicurezza energetica nazionale, non solo una piattaforma di efficienza operativa.</p>
+    </div>
+    <div class="problem-card">
+      <span class="problem-icon">// Pain CPO</span>
+      <h3>Costi elevati, mercato frammentato e non coperto</h3>
+      <p>I team interni di ricerca location costano €200-400K/anno. Nonostante questo, non riescono a coprire la coda lunga del mercato: la maggioranza delle location disponibili appartiene a piccoli proprietari e piccoli gruppi, non ai grandi retailer. ChargeBid a €10K nel primo anno è strutturalmente più economico e copre il segmento che i team interni non raggiungono.</p>
+    </div>
+    <div class="problem-card">
+      <span class="problem-icon">// Pain Landlord</span>
+      <h3>Una sola offerta, nessun benchmark, troppa burocrazia</h3>
+      <p>I proprietari ricevono al massimo una proposta, senza poter confrontare condizioni, valutare l'affidabilità del CPO o avere supporto legale. Dopo 10-12 mesi di esclusiva, l'opzione spesso decade e il landlord riparte da zero — con perdita di tempo e opportunità di reddito passivo.</p>
+    </div>
+    <div class="problem-card">
+      <span class="problem-icon">// Urgenza OEM</span>
+      <h3>BYD e gli OEM asiatici: la finestra si chiude in 6-9 mesi</h3>
+      <p>I costruttori cinesi hanno capitali e urgenza ma zero relazioni con i landlord europei. ChargeBid può far partire BYD con centinaia di location in letting in 3 mesi. Senza una soluzione strutturata, costruiranno processi alternativi interni entro 6-9 mesi — una finestra che non si riaprirà.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="section-tag">02 — La Soluzione</div>
+  <h2 class="section-title">Da mesi di caos<br>a settimane di chiarezza</h2>
+  <p class="section-intro">ChargeBid è un marketplace intelligente a due lati che valida le location, gestisce offerte competitive e automatizza i contratti — riducendo il time-to-deploy da 12 mesi a 2–4 settimane.</p>
+
+  <div class="solution-layout">
+    <div class="marketplace-diagram">
+      <div class="diagram-row">
+        <div class="actor-box">
+          <div class="actor-title">CPO</div>
+          <p>Cerca location ottimali per espandere la rete</p>
+        </div>
+        <div style="width:20px"></div>
+        <div class="platform-center">
+          <div class="platform-name">ChargeBid</div>
+          <ul>
+            <li>Analisi flusso traffico</li>
+            <li>Verifica potenza disponibile</li>
+            <li>Visura catastale e permessi</li>
+            <li>Stima costi e ROI</li>
+            <li>Contratti automatizzati</li>
+            <li>Motore di confronto offerte</li>
+          </ul>
+        </div>
+        <div style="width:20px"></div>
+        <div class="actor-box">
+          <div class="actor-title">Landlord</div>
+          <p>Cerca la migliore offerta per la ricarica EV nel suo immobile</p>
+        </div>
+      </div>
+      <div class="arrow-row">
+        <div class="arrow-label" style="color:var(--electric);font-size:11px;font-family:'Space Mono',monospace;">PUSH: CPO invia offerte</div>
+        <div class="arrow-mid">⇄</div>
+        <div class="arrow-label" style="color:var(--lime);font-size:11px;font-family:'Space Mono',monospace;text-align:right;">PULL: Landlord riceve proposte</div>
+      </div>
+      <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.1em;margin-bottom:12px;">PRIMA vs CON CHARGEBID</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:11px;">
+          <div style="color:var(--muted)">Metrica</div>
+          <div style="color:var(--muted)">Prima</div>
+          <div style="color:var(--electric)">Con ChargeBid</div>
+
+          <div style="color:var(--muted);border-top:1px solid var(--border);padding-top:6px">Tempi</div>
+          <div style="border-top:1px solid var(--border);padding-top:6px;color:#888">6–12 mesi</div>
+          <div style="border-top:1px solid var(--border);padding-top:6px;color:var(--lime)">2–4 settimane</div>
+
+          <div style="color:var(--muted);border-top:1px solid var(--border);padding-top:6px">Costo ricerca</div>
+          <div style="border-top:1px solid var(--border);padding-top:6px;color:#888">€10–50K</div>
+          <div style="border-top:1px solid var(--border);padding-top:6px;color:var(--lime)">€500–1K</div>
+
+          <div style="color:var(--muted);border-top:1px solid var(--border);padding-top:6px">Offerte</div>
+          <div style="border-top:1px solid var(--border);padding-top:6px;color:#888">1 proposta</div>
+          <div style="border-top:1px solid var(--border);padding-top:6px;color:var(--lime)">Offerte competitive</div>
+
+          <div style="color:var(--muted);border-top:1px solid var(--border);padding-top:6px">Contratti</div>
+          <div style="border-top:1px solid var(--border);padding-top:6px;color:#888">Manuali</div>
+          <div style="border-top:1px solid var(--border);padding-top:6px;color:var(--lime)">Automatizzati</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="features-list">
+      <div class="feature-item">
+        <div class="feature-num">01 —</div>
+        <div>
+          <h4>Motore di Geo-Intelligence</h4>
+          <p>Scoring automatico delle location: flussi di traffico, densità parco auto EV, dwell time, punti di interesse, capacità della rete elettrica, visure catastali e tempistiche per i permessi — tutto in un'unica dashboard.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">02 —</div>
+        <div>
+          <h4>Sistema di Offerte Competitive (Bidding)</h4>
+          <p>I CPO inviano offerte personalizzate con modello di investimento, revenue share, configurazione dispositivi, tempistiche e condizioni commerciali. I landlord confrontano tutte le offerte fianco a fianco.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">03 —</div>
+        <div>
+          <h4>Generazione Automatica dei Contratti</h4>
+          <p>Accordi standardizzati di settore generati e firmati digitalmente all'interno della piattaforma tramite integrazione DocuSign. Ulteriore fonte di ricavi attraverso servizi di standardizzazione contrattuale.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">04 —</div>
+        <div>
+          <h4>Dashboard Deal Flow</h4>
+          <p>Visibilità completa della pipeline per i CPO: qualificazione lead, analisi sito, offerte, negoziazione e chiusura — tutto tracciato in un unico posto. Decisioni in tempo reale basate sui dati.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE MARKET SIDES -->
+<section class="three-sides" id="three-sides">
+  <div class="section-tag">02b — I Lati della Piattaforma</div>
+  <h2 class="section-title">Una piattaforma a tre lati<br>che serve ogni attore del mercato</h2>
+  <p class="section-intro">Oltre al marketplace centrale landlord–CPO, ChargeBid attiva due flussi di valore aggiuntivi ad alto potenziale immediato che nessun'altra piattaforma affronta oggi.</p>
+
+  <div class="sides-grid">
+    <div class="side-card">
+      <span class="side-num">Lato 01 — Landlord</span>
+      <h3>I proprietari pubblicano le loro location</h3>
+      <p>I proprietari immobiliari inseriscono le loro sedi e ricevono offerte competitive da più CPO in simultanea. I landlord con installazioni già esistenti accedono gratuitamente in cambio di un feedback sull'esperienza con il CPO — alimentando il rating proprietario della piattaforma fin dal giorno 1.</p>
+      <ul>
+        <li>Pubblica la location con GPS, foto e specifiche</li>
+        <li>Ricevi e confronta offerte competitive di più CPO</li>
+        <li>Feedback su installazioni esistenti = accesso gratuito</li>
+        <li>Supporto legale e contrattuale assistito dalla piattaforma</li>
+        <li>Reddito passivo senza alcuno sforzo di ricerca</li>
+      </ul>
+    </div>
+
+    <div class="side-card">
+      <span class="side-num">Lato 02 — CPO (Abbonamento)</span>
+      <h3>Gli operatori si abbonano per accedere a location pre-validate</h3>
+      <p>I CPO abbonati accedono a tutte le location con analisi geo-intelligence completa. La subscription parte da €10.000 nel primo anno — barriera bassa per dimostrare il valore — con incremento del 100% al secondo anno una volta consolidati i risultati.</p>
+      <ul>
+        <li>Scoring completo: traffico, potenza, catasto, permessi, ROI</li>
+        <li>Strumenti di offerta e gestione deal pipeline</li>
+        <li>Rating dei CPO competitor — dato proprietario non replicabile</li>
+        <li>NPS score e analytics reputazionali venduti come premium add-on</li>
+        <li>Y1: €10.000 · Y2: €20.000 · Y3+: €25.000–40.000</li>
+      </ul>
+    </div>
+
+    <div class="side-card">
+      <span class="side-num">Lato 03 — Mercato Secondario CPO</span>
+      <h3>CPO con charger in letting o location contrattualizzate</h3>
+      <p>Un mercato secondario immediato e ad alta domanda: i CPO che hanno location con più charger installati possono darne uno in letting a terzi (OEM, nuovi entranti), oppure cedere location già contrattualizzate ma non ancora sviluppate. BYD e gli OEM asiatici possono essere operativi con centinaia di location in 3 mesi — senza costruire relazioni da zero con i landlord.</p>
+      <ul>
+        <li>CPO cede in letting uno o più charger su location già attiva</li>
+        <li>CPO vende location contrattualizzata non più in piano di sviluppo</li>
+        <li>Target immediato: BYD, NIO, CATL e OEM con reti proprietarie</li>
+        <li>Time to market per OEM: 3 mesi vs 18-24 mesi tradizionali</li>
+        <li>Commissione ChargeBid trattenuta sulla transazione (modello clearing house)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMER JOURNEY -->
+<section id="journey" style="background:var(--navy);">
+  <div class="section-tag">02c — Customer Journey & Contrattualistica</div>
+  <h2 class="section-title">Come funziona<br>per Landlord e CPO</h2>
+  <p class="section-intro">Due journey distinte, protette da meccanismi anti-abuso e da una contrattualistica standard pensata per diventare il riferimento del settore.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px;">
+
+    <!-- LANDLORD JOURNEY -->
+    <div style="background:var(--card);border:1px solid var(--border);padding:40px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--electric),transparent);"></div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--electric);letter-spacing:0.15em;margin-bottom:20px;">JOURNEY — LANDLORD</div>
+
+      <!-- Step 1 -->
+      <div style="display:flex;gap:16px;margin-bottom:20px;">
+        <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--electric);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:var(--navy);">1</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;">Pubblica la location su ChargeBid</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Carica indirizzo, foto, specifiche tecniche e preferenze. Accetta le condizioni di pubblicazione: con l'accettazione, <strong style="color:var(--electric);">cede a ChargeBid l'esclusiva della location per 12 mesi.</strong> Se la location viene ceduta a terzi prima della scadenza, il landlord è tenuto al pagamento di una penale contrattuale.</div>
+        </div>
+      </div>
+      <div style="border-left:1px dashed rgba(0,197,255,0.3);margin-left:14px;height:16px;margin-bottom:4px;"></div>
+
+      <!-- Step 2 -->
+      <div style="display:flex;gap:16px;margin-bottom:20px;">
+        <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--electric);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:var(--navy);">2</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;">Riceve offerte dai CPO abbonati</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">La location è visibile ai CPO con subscription attiva. Il landlord riceve offerte competitive con revenue share, tempi di installazione, tipo di charger e rating del CPO — tutto in un'unica dashboard.</div>
+        </div>
+      </div>
+      <div style="border-left:1px dashed rgba(0,197,255,0.3);margin-left:14px;height:16px;margin-bottom:4px;"></div>
+
+      <!-- Step 3 -->
+      <div style="display:flex;gap:16px;margin-bottom:20px;">
+        <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--electric);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:var(--navy);">3</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;">Sceglie e firma digitalmente</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Contratto standard ChargeBid generato automaticamente: include clausole di revenue sharing, sub-lease, letting e cessione del contratto. Il landlord firma con firma digitale integrata — nessun intervento notarile per la fase iniziale.</div>
+        </div>
+      </div>
+      <div style="border-left:1px dashed rgba(0,197,255,0.3);margin-left:14px;height:16px;margin-bottom:4px;"></div>
+
+      <!-- Step 4 -->
+      <div style="display:flex;gap:16px;">
+        <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:var(--navy);">4</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;">Incassa la revenue share tramite ChargeBid</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Il CPO paga la revenue share annuale tramite piattaforma. ChargeBid trattiene la commissione e accredita il netto al landlord — automatico, tracciato, senza frizioni.</div>
+        </div>
+      </div>
+
+      <!-- ANTI ABUSE BOX -->
+      <div style="margin-top:28px;padding:16px;background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.3);border-radius:2px;">
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:#f97316;letter-spacing:0.12em;margin-bottom:8px;">⚠ ANTI-ABUSO LANDLORD</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.7;">
+          → Esclusiva 12 mesi dalla pubblicazione: cedere la location fuori piattaforma comporta penale<br>
+          → Verifica identità e titolarità dell'immobile obbligatoria al momento della pubblicazione<br>
+          → Massimo N location per utente non verificato (limite anti-spam)<br>
+          → Location già cedute non riproponibili per 24 mesi
+        </div>
+      </div>
+    </div>
+
+    <!-- CPO JOURNEY -->
+    <div style="background:var(--card);border:1px solid var(--border);padding:40px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--lime),transparent);"></div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--lime);letter-spacing:0.15em;margin-bottom:20px;">JOURNEY — CPO</div>
+
+      <!-- Step 1 -->
+      <div style="display:flex;gap:16px;margin-bottom:20px;">
+        <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:var(--navy);">1</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;">Si abbona — o viene onboardato gratuitamente (Y1)</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;"><strong style="color:var(--lime);">Anno 1:</strong> electrip è il CPO âncora onboardato da subito. I property manager partner (Cushman & Wakefield, CBRE o simili) accedono gratuitamente al go-live portando in dote centinaia di location pre-caricate. Gli altri CPO vengono acquisiti dal team sales con subscription €10K Y1.</div>
+        </div>
+      </div>
+      <div style="border-left:1px dashed rgba(139,255,71,0.3);margin-left:14px;height:16px;margin-bottom:4px;"></div>
+
+      <!-- Step 2 -->
+      <div style="display:flex;gap:16px;margin-bottom:20px;">
+        <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:var(--navy);">2</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;">Vede le location — con livello di dettaglio basato sulla subscription</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">
+            <span style="color:var(--lime);font-weight:600;">Con subscription:</span> indirizzo esatto, foto, dati tecnici, geo-intelligence completa, ROI stimato, NPS del landlord.<br>
+            <span style="color:#f97316;font-weight:600;">Senza subscription:</span> solo area geografica con approssimazione di 3 km — incentivo forte all'abbonamento.
+          </div>
+        </div>
+      </div>
+      <div style="border-left:1px dashed rgba(139,255,71,0.3);margin-left:14px;height:16px;margin-bottom:4px;"></div>
+
+      <!-- Step 3 -->
+      <div style="display:flex;gap:16px;margin-bottom:20px;">
+        <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:var(--navy);">3</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;">Invia offerta e negozia sulla piattaforma</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Il CPO invia la sua offerta con modello di investimento, revenue share proposta, tipo di charger e tempistiche. Tutte le comunicazioni con il landlord avvengono su ChargeBid — nessun contatto diretto fuori piattaforma prima della firma.</div>
+        </div>
+      </div>
+      <div style="border-left:1px dashed rgba(139,255,71,0.3);margin-left:14px;height:16px;margin-bottom:4px;"></div>
+
+      <!-- Step 4 -->
+      <div style="display:flex;gap:16px;">
+        <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--electric);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:var(--navy);">4</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;">Firma, paga e gestisce tramite clearing house</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Firma il contratto standard ChargeBid. Paga la fee di chiusura e la revenue share annuale tramite piattaforma. ChargeBid trattiene la commissione su entrambi gli stream automaticamente.</div>
+        </div>
+      </div>
+
+      <!-- ANTI ABUSE BOX -->
+      <div style="margin-top:28px;padding:16px;background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.3);border-radius:2px;">
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:#f97316;letter-spacing:0.12em;margin-bottom:8px;">⚠ ANTI-ABUSO CPO</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.7;">
+          → Contatto diretto con landlord fuori piattaforma vietato prima della firma: penale contrattuale<br>
+          → Deal concluso fuori piattaforma dopo contatto interno: fee di chiusura dovuta comunque<br>
+          → Rating e NPS visibili a tutti: comportamento scorretto penalizza il ranking e la visibilità<br>
+          → Revenue share verificata tramite clearing house: nessuna possibilità di sottodichiarare
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTRATTUALISTICA STANDARD -->
+  <div style="background:var(--card);border:1px solid var(--border);padding:40px;border-top:none;border-left:3px solid var(--lime);">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;">
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--lime);letter-spacing:0.15em;margin-bottom:16px;">CONTRATTUALISTICA STANDARD CHARGEBID</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--white);margin-bottom:12px;">Lo standard che diventerà il riferimento del settore</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7;">ChargeBid sviluppa una contrattualistica standard pensata per coprire tutti gli scenari del ciclo di vita di una location EV. L'obiettivo è diventare il template di riferimento adottato da CPO, landlord e property manager in tutta Europa — esattamente come i contratti ISDA sono diventati lo standard nel mercato dei derivati.</p>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--lime);letter-spacing:0.15em;margin-bottom:16px;">CLAUSOLE COPERTE DAL CONTRATTO STANDARD</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:12px;color:var(--muted);">
+            <span style="color:var(--lime);flex-shrink:0;margin-top:2px;">→</span>
+            <span><strong style="color:var(--white);">Revenue Sharing:</strong> percentuale dei ricavi di ricarica riconosciuta al landlord, con meccanismo di calcolo e pagamento tramite clearing house ChargeBid</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:12px;color:var(--muted);">
+            <span style="color:var(--lime);flex-shrink:0;margin-top:2px;">→</span>
+            <span><strong style="color:var(--white);">Cessione del contratto:</strong> possibilità per il CPO di cedere il contratto a un terzo (OEM, altro CPO) con notifica al landlord e approvazione tramite piattaforma</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:12px;color:var(--muted);">
+            <span style="color:var(--lime);flex-shrink:0;margin-top:2px;">→</span>
+            <span><strong style="color:var(--white);">Sub-lease:</strong> il landlord può concedere in sub-locazione porzioni della location per l'installazione, con regole chiare su manutenzione e responsabilità</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:12px;color:var(--muted);">
+            <span style="color:var(--lime);flex-shrink:0;margin-top:2px;">→</span>
+            <span><strong style="color:var(--white);">Letting dei charger:</strong> il CPO può dare in letting uno o più charger installati a operatori terzi (OEM, fleet manager), con commissione automatica su ChargeBid</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:12px;color:var(--muted);">
+            <span style="color:var(--lime);flex-shrink:0;margin-top:2px;">→</span>
+            <span><strong style="color:var(--white);">Esclusiva di pubblicazione:</strong> 12 mesi dalla pubblicazione su ChargeBid, con penale in caso di cessione fuori piattaforma</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Y1 GO-LIVE STRATEGY -->
+  <div style="margin-top:2px;background:rgba(0,197,255,0.04);border:1px solid var(--border);padding:32px;">
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--electric);letter-spacing:0.15em;margin-bottom:20px;">STRATEGIA GO-LIVE ANNO 1 — COME RISOLVIAMO IL COLD START</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+      <div style="padding:20px;background:var(--card);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--electric);letter-spacing:0.1em;margin-bottom:10px;">CPO ÂNCORA</div>
+        <div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:8px;">electrip — onboarding immediato</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6;">electrip (fondatore) è il primo CPO sulla piattaforma dal giorno 1. Porta location reali già contrattualizzate, dati di installazione reali per il rating, e la credibilità operativa che altri CPO valuteranno prima di iscriversi.</div>
+      </div>
+      <div style="padding:20px;background:var(--card);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--lime);letter-spacing:0.1em;margin-bottom:10px;">PROPERTY MANAGER PARTNER</div>
+        <div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:8px;">Cushman & Wakefield / CBRE</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6;">Accesso gratuito alla piattaforma per il go-live in cambio del caricamento del loro portfolio di location. Un grande property manager può portare centinaia di landlord qualificati in un'unica partnership — risolvendo il lato supply fin dal lancio.</div>
+      </div>
+      <div style="padding:20px;background:var(--card);border:1px solid var(--border);">
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:#f59e0b;letter-spacing:0.1em;margin-bottom:10px;">LANDLORD CON INSTALLAZIONI ESISTENTI</div>
+        <div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:8px;">Recensioni = pubblicazione gratuita</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6;">I landlord che già hanno una colonnina installata possono pubblicare gratuitamente una location per ogni recensione fornita sulla loro esperienza con il CPO. Alimentano il rating proprietario e il database di feedback dal giorno 1 — senza costi di acquisizione.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET -->
+<section id="market">
+  <div class="section-tag">03 — Opportunità di Mercato</div>
+  <h2 class="section-title">Un mercato enorme, urgente<br>e ancora non servito</h2>
+  <p class="section-intro">Il piano di costruzione dell'infrastruttura EV è uno dei più grandi programmi di impiego di capitale nella storia europea. ChargeBid si posiziona nel punto critico di strozzatura.</p>
+
+  <div class="market-layout">
+    <div class="tam-visual">
+      <div class="tam-ring tam">
+        <div class="tam-label">TAM — Mercato Totale Indirizzabile</div>
+        <div class="tam-value">€47 Miliardi</div>
+        <div class="tam-desc">Valore della distribuzione di 5,9 milioni di nuovi punti di ricarica in Europa entro il 2050</div>
+      </div>
+      <div class="tam-ring sam">
+        <div class="tam-label">SAM — Mercato Servibile Indirizzabile</div>
+        <div class="tam-value">€12 Miliardi</div>
+        <div class="tam-desc">Europa Occidentale e Centrale, immobili commerciali/retail, CPO con piani da 10+ stazioni</div>
+      </div>
+      <div class="tam-ring som">
+        <div class="tam-label">SOM — Mercato Servibile Ottenibile</div>
+        <div class="tam-value">€850 Milioni</div>
+        <div class="tam-desc">5% di quota di mercato in Italia, Germania, Francia, Paesi Bassi — target 50.000 location in 5–7 anni</div>
+      </div>
+    </div>
+
+    <div class="market-points">
+      <div class="market-point">
+        <h4>Lo shock Iran accelera la transizione — irreversibilmente</h4>
+        <p>Brent a 100$/barile, TTF a 72€/MWh, +10 miliardi di costi energetici per l'Italia nel 2026. L'IEA parla del più grande shock energetico della storia. Chi guida EV è immune. Ogni crisi geopolitica in Medio Oriente rafforza la narrativa pro-elettrico con dati di costo reali e immediati.</p>
+      </div>
+      <div class="market-point">
+        <h4>Tailwind normativi irreversibili</h4>
+        <p>L'AFIR (2025) impone caricatori rapidi ogni 60 km sulle reti TEN-T. Il Fit for 55 punta alla trasformazione del parco auto entro il 2030. Sono scadenze legali vincolanti — e lo shock Iran accelera ulteriormente la volontà politica di investire nell'indipendenza energetica.</p>
+      </div>
+      <div class="market-point">
+        <h4>OEM asiatici: domanda immediata e capitali abbondanti</h4>
+        <p>BYD, NIO, CATL e altri costruttori cinesi stanno costruendo reti di ricarica proprietarie in Europa. Hanno capitali ma zero relazioni con i landlord locali. ChargeBid li fa partire con centinaia di location in 3 mesi invece di 18-24. È la killer application del mercato secondario.</p>
+      </div>
+      <div class="market-point">
+        <h4>Nessuna concorrenza diretta — e il vantaggio del first mover si compone</h4>
+        <p>ChargeBid occupa da sola il quadrante automatizzato + EV-specializzato. Ma il vero moat è temporale: partendo 12-18 mesi prima dei competitor, accumula dati proprietari di transazioni reali (rating CPO, NPS, tempi installazione) che nessun concorrente potrà mai avere retroattivamente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE -->
+<section class="revenue" id="revenue">
+  <div class="section-tag">04 — Modello di Business</div>
+  <h2 class="section-title">Cinque flussi di ricavi<br>su due clearing house</h2>
+  <p class="section-intro">ChargeBid è clearing house su due stream di pagamento distinti: la fee di chiusura una tantum e la revenue sharing annuale ricorrente. Su entrambi trattiene automaticamente la propria commissione — modello Stripe applicato all'infrastruttura EV.</p>
+
+  <div class="revenue-streams" style="grid-template-columns:repeat(5,1fr);">
+    <div class="rev-card" data-num="01">
+      <h4>Subscription CPO</h4>
+      <div class="rev-amount">€10K→€20K→€40K</div>
+      <p>Incrementale anno su anno. Y1 barriera bassa, Y2 +100% ancorato ai risultati, Y3+ a regime.</p>
+    </div>
+    <div class="rev-card" data-num="02">
+      <h4>Fee Chiusura Deal</h4>
+      <div class="rev-amount">€500–1.000 / loc.</div>
+      <p>Una tantum alla firma. ChargeBid è clearing house: trattiene la commissione sul pagamento della fee dal CPO al landlord.</p>
+    </div>
+    <div class="rev-card" data-num="03">
+      <h4>Revenue Share Annuale</h4>
+      <div class="rev-amount">0,3% rev. ricarica</div>
+      <p>Il CPO paga annualmente al landlord una % sui ricavi di ricarica. ChargeBid gestisce il flusso e trattiene la sua quota — automatico, ricorrente, senza integrazioni billing.</p>
+    </div>
+    <div class="rev-card" data-num="04">
+      <h4>Letting OEM/CPO</h4>
+      <div class="rev-amount">% sulla transazione</div>
+      <p>Mercato secondario: CPO cede charger in letting a OEM/nuovi entranti. ChargeBid clearing house anche su questo stream.</p>
+    </div>
+    <div class="rev-card" data-num="05">
+      <h4>NPS Analytics</h4>
+      <div class="rev-amount">Add-on premium</div>
+      <p>Rating proprietario e NPS score venduti ai CPO. Dataset impossibile da replicare, costruito dal primo giorno grazie ai feedback dei landlord esistenti.</p>
+    </div>
+  </div>
+
+  <!-- CLEARING HOUSE EXPLANATION -->
+  <div style="margin-top:2px;background:var(--card);border:1px solid var(--border);padding:32px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--electric);letter-spacing:0.15em;margin-bottom:12px;">STREAM A — FEE DI CHIUSURA</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.9;">
+          CPO firma accordo con landlord<br>
+          <span style="color:var(--electric)">→</span> CPO paga fee di chiusura tramite ChargeBid<br>
+          <span style="color:var(--electric)">→</span> ChargeBid trattiene <strong style="color:var(--white)">commissione X%</strong><br>
+          <span style="color:var(--electric)">→</span> Landlord riceve netto automaticamente
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--lime);letter-spacing:0.15em;margin-bottom:12px;">STREAM B — REVENUE SHARE ANNUALE</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.9;">
+          CPO genera ricavi dalla colonnina ogni anno<br>
+          <span style="color:var(--lime)">→</span> CPO paga revenue share annuale tramite ChargeBid<br>
+          <span style="color:var(--lime)">→</span> ChargeBid trattiene <strong style="color:var(--white)">commissione Y%</strong><br>
+          <span style="color:var(--lime)">→</span> Landlord riceve netto — e ChargeBid ottiene dati reali di fatturato per il rating
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);">
+      ⚡ Zero integrazioni con sistemi billing dei CPO · Zero accesso a dati sensibili · Automatico su ogni transazione · Ogni pagamento genera dati per il rating proprietario
+    </div>
+  </div>
+
+  <!-- LTV BAR UPDATED -->
+  <div class="ltv-bar" style="margin-top:2px;">
+    <div class="ltv-metric">
+      <div class="ltv-val">€35K</div>
+      <div class="ltv-label">Ricavo medio CPO Anno 1 (rivisto)</div>
+    </div>
+    <div class="ltv-divider"></div>
+    <div class="ltv-metric">
+      <div class="ltv-val" style="color:var(--electric)">€250K+</div>
+      <div class="ltv-label">LTV per CPO a 5 anni (con rev.share)</div>
+    </div>
+    <div class="ltv-divider"></div>
+    <div class="ltv-metric">
+      <div class="ltv-val" style="color:var(--white);font-size:36px">€38M</div>
+      <div class="ltv-label">Ricavi lordi proiettati — 2035</div>
+    </div>
+    <div class="ltv-divider"></div>
+    <div class="ltv-metric">
+      <div class="ltv-val" style="color:var(--white);font-size:36px">IT+4</div>
+      <div class="ltv-label">Paesi attivi al 2030</div>
+    </div>
+  </div>
+
+  <!-- REVENUE BY COUNTRY CHART -->
+  <div style="margin-top:60px;">
+    <div class="section-tag" style="margin-bottom:8px;">Proiezioni Ricavi per Paese (€K lordi)</div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:24px;">Espansione progressiva: Italia (Y1), Germania+Francia (Y3), Spagna+Paesi Bassi (Y4), restante Europa (Y5+)</p>
+
+    <!-- Stacked bar chart via HTML -->
+    <div style="display:flex;flex-direction:column;gap:12px;">
+
+      <!-- Legend -->
+      <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:8px;font-size:11px;">
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#00c5ff;border-radius:2px;display:inline-block;"></span>Italia</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#8bff47;border-radius:2px;display:inline-block;"></span>Germania</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#f59e0b;border-radius:2px;display:inline-block;"></span>Francia</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#f97316;border-radius:2px;display:inline-block;"></span>Spagna</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#a78bfa;border-radius:2px;display:inline-block;"></span>Altri EU</span>
+      </div>
+
+      <!-- Rows: Year label + stacked bar -->
+      <style>
+        .cb-bar-row { display:flex; align-items:center; gap:12px; }
+        .cb-bar-year { font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); width:36px; flex-shrink:0; }
+        .cb-bar-total { font-family:'Space Mono',monospace; font-size:10px; color:var(--white); width:52px; flex-shrink:0; text-align:right; }
+        .cb-bar-track { flex:1; display:flex; height:22px; border-radius:2px; overflow:hidden; }
+        .cb-seg { height:100%; transition:width 0.3s; }
+      </style>
+
+      <!-- 2027: Italy only 480K total -->
+      <div class="cb-bar-row">
+        <div class="cb-bar-year">2027</div>
+        <div class="cb-bar-track" style="background:rgba(255,255,255,0.05);">
+          <div class="cb-seg" style="width:100%;background:#00c5ff;"></div>
+        </div>
+        <div class="cb-bar-total">€480K</div>
+      </div>
+
+      <!-- 2028: IT+DE start 1.1M -->
+      <div class="cb-bar-row">
+        <div class="cb-bar-year">2028</div>
+        <div class="cb-bar-track" style="background:rgba(255,255,255,0.05);">
+          <div class="cb-seg" style="width:72%;background:#00c5ff;"></div>
+          <div class="cb-seg" style="width:28%;background:#8bff47;"></div>
+        </div>
+        <div class="cb-bar-total">€1.1M</div>
+      </div>
+
+      <!-- 2029: IT+DE+FR 2.2M -->
+      <div class="cb-bar-row">
+        <div class="cb-bar-year">2029</div>
+        <div class="cb-bar-track" style="background:rgba(255,255,255,0.05);">
+          <div class="cb-seg" style="width:55%;background:#00c5ff;"></div>
+          <div class="cb-seg" style="width:28%;background:#8bff47;"></div>
+          <div class="cb-seg" style="width:17%;background:#f59e0b;"></div>
+        </div>
+        <div class="cb-bar-total">€2.2M</div>
+      </div>
+
+      <!-- 2030: +ES 4.0M -->
+      <div class="cb-bar-row">
+        <div class="cb-bar-year">2030</div>
+        <div class="cb-bar-track" style="background:rgba(255,255,255,0.05);">
+          <div class="cb-seg" style="width:45%;background:#00c5ff;"></div>
+          <div class="cb-seg" style="width:28%;background:#8bff47;"></div>
+          <div class="cb-seg" style="width:17%;background:#f59e0b;"></div>
+          <div class="cb-seg" style="width:10%;background:#f97316;"></div>
+        </div>
+        <div class="cb-bar-total">€4.0M</div>
+      </div>
+
+      <!-- 2031: +Altri EU 7.0M -->
+      <div class="cb-bar-row">
+        <div class="cb-bar-year">2031</div>
+        <div class="cb-bar-track" style="background:rgba(255,255,255,0.05);">
+          <div class="cb-seg" style="width:38%;background:#00c5ff;"></div>
+          <div class="cb-seg" style="width:26%;background:#8bff47;"></div>
+          <div class="cb-seg" style="width:16%;background:#f59e0b;"></div>
+          <div class="cb-seg" style="width:10%;background:#f97316;"></div>
+          <div class="cb-seg" style="width:10%;background:#a78bfa;"></div>
+        </div>
+        <div class="cb-bar-total">€7.0M</div>
+      </div>
+
+      <!-- 2033: Full EU 18M -->
+      <div class="cb-bar-row">
+        <div class="cb-bar-year">2033</div>
+        <div class="cb-bar-track" style="background:rgba(255,255,255,0.05);">
+          <div class="cb-seg" style="width:28%;background:#00c5ff;"></div>
+          <div class="cb-seg" style="width:24%;background:#8bff47;"></div>
+          <div class="cb-seg" style="width:18%;background:#f59e0b;"></div>
+          <div class="cb-seg" style="width:14%;background:#f97316;"></div>
+          <div class="cb-seg" style="width:16%;background:#a78bfa;"></div>
+        </div>
+        <div class="cb-bar-total">€18M</div>
+      </div>
+
+      <!-- 2035: Full EU mature 38M -->
+      <div class="cb-bar-row">
+        <div class="cb-bar-year">2035</div>
+        <div class="cb-bar-track" style="background:rgba(255,255,255,0.05);">
+          <div class="cb-seg" style="width:22%;background:#00c5ff;"></div>
+          <div class="cb-seg" style="width:24%;background:#8bff47;"></div>
+          <div class="cb-seg" style="width:19%;background:#f59e0b;"></div>
+          <div class="cb-seg" style="width:16%;background:#f97316;"></div>
+          <div class="cb-seg" style="width:19%;background:#a78bfa;"></div>
+        </div>
+        <div class="cb-bar-total">€38M</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS CASE -->
+<section id="businesscase" style="background:var(--navy2);">
+  <div class="section-tag">04b — Business Case</div>
+  <h2 class="section-title">CapEx · OpEx · EBITDA<br>2027–2031</h2>
+  <p class="section-intro">Ipotesi conservative: team full remote, 3-5 CPO anno 1, 200 location chiuse nel primo anno operativo. Break-even EBITDA in Anno 2 (2028). CEO, CTO, CMO, CFO: RAL €50K (cost company €60K) fino a BE. Dal Y3: CEO +20% vs C-suite. Tutti + MIP dal break-even.</p>
+
+  <!-- ASSUMPTIONS BOX -->
+  <div style="background:var(--card);border:1px solid var(--border);padding:28px;margin-bottom:40px;border-left:3px solid var(--electric);">
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--electric);letter-spacing:0.15em;margin-bottom:16px;">IPOTESI DEL MODELLO</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;font-size:12px;color:var(--muted);line-height:1.8;">
+      <div>
+        <strong style="color:var(--white);display:block;margin-bottom:4px;">Ricavi</strong>
+        Subscription €10K Y1 → €20K Y2<br>
+        Fee chiusura: €750 avg/location<br>
+        Rev.share clearing: 15% su flusso CPO→Landlord<br>
+        Rev.share media landlord: 0.3% ricavi ricarica<br>
+        Ricavo ricarica avg/colonnina: €8.000/anno
+      </div>
+      <div>
+        <strong style="color:var(--white);display:block;margin-bottom:4px;">Volumi</strong>
+        Y1: 4 CPO, 200 location chiuse<br>
+        Y2: 8 CPO, 450 location, IT+DE<br>
+        Y3: 15 CPO, 900 location, +FR<br>
+        Y4: 25 CPO, 1.800 loc., +ES<br>
+        Y5: 40 CPO, 3.200 loc., +EU
+      </div>
+      <div>
+        <strong style="color:var(--white);display:block;margin-bottom:4px;">Costi</strong>
+        Team full remote (Milano)<br>
+        CapEx: sviluppo piattaforma<br>
+        OpEx: infrastruttura cloud, legale, marketing<br>
+        Personale: CEO, CTO, CMO, CFO, Sales, Operations (cresce con ricavi)<br>
+        Nessun ufficio fisico Y1-Y2
+      </div>
+    </div>
+  </div>
+
+  <!-- P&L TABLE -->
+  <div style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding:12px 16px;background:var(--navy);color:var(--electric);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.1em;border-bottom:1px solid var(--border);">VOCE (€K)</th>
+          <th style="text-align:right;padding:12px 16px;background:var(--navy);color:var(--muted);font-family:'Space Mono',monospace;font-size:10px;border-bottom:1px solid var(--border);">2027<br><span style="font-size:9px;color:var(--border)">Y1</span></th>
+          <th style="text-align:right;padding:12px 16px;background:var(--navy);color:var(--muted);font-family:'Space Mono',monospace;font-size:10px;border-bottom:1px solid var(--border);">2028<br><span style="font-size:9px;color:var(--border)">Y2</span></th>
+          <th style="text-align:right;padding:12px 16px;background:var(--navy);color:var(--muted);font-family:'Space Mono',monospace;font-size:10px;border-bottom:1px solid var(--border);">2029<br><span style="font-size:9px;color:var(--border)">Y3</span></th>
+          <th style="text-align:right;padding:12px 16px;background:var(--navy);color:var(--muted);font-family:'Space Mono',monospace;font-size:10px;border-bottom:1px solid var(--border);">2030<br><span style="font-size:9px;color:var(--border)">Y4</span></th>
+          <th style="text-align:right;padding:12px 16px;background:var(--navy);color:var(--lime);font-family:'Space Mono',monospace;font-size:10px;border-bottom:1px solid var(--border);">2031<br><span style="font-size:9px;color:var(--border)">Y5</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- REVENUES -->
+        <tr style="background:rgba(0,197,255,0.04);">
+          <td colspan="6" style="padding:10px 16px;font-family:'Space Mono',monospace;font-size:9px;color:var(--electric);letter-spacing:0.1em;border-bottom:1px solid var(--border);">RICAVI</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">Subscription CPO</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">40</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">160</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">450</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">875</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">1.400</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">Fee chiusura deal</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">150</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">340</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">675</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">1.350</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">2.400</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">Clearing house rev.share (15% flusso)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">36</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">162</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">486</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">1.080</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">2.304</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">Letting OEM/CPO secondario</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">120</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">280</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">480</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">720</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">1.100</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid var(--border);">NPS & Rating Analytics</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">20</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">60</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">120</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">200</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">320</td>
+        </tr>
+        <tr style="background:rgba(0,197,255,0.06);">
+          <td style="padding:10px 16px;font-weight:600;color:var(--electric);border-bottom:1px solid var(--border);">TOTALE RICAVI</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:var(--electric);border-bottom:1px solid var(--border);">366</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:var(--electric);border-bottom:1px solid var(--border);">1.002</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:var(--electric);border-bottom:1px solid var(--border);">2.211</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:var(--electric);border-bottom:1px solid var(--border);">4.225</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:var(--electric);border-bottom:1px solid var(--border);">7.524</td>
+        </tr>
+
+        <!-- CAPEX -->
+        <tr style="background:rgba(0,197,255,0.04);">
+          <td colspan="6" style="padding:10px 16px;font-family:'Space Mono',monospace;font-size:9px;color:var(--electric);letter-spacing:0.1em;border-bottom:1px solid var(--border);">CAPEX</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">Sviluppo piattaforma (MVP + iterazioni)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(280)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(150)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(100)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(80)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(80)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid var(--border);">IP, licenze, integrazioni API</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">(40)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">(20)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">(15)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">(15)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">(15)</td>
+        </tr>
+        <tr style="background:rgba(255,100,100,0.04);">
+          <td style="padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">TOTALE CAPEX</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(320)</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(170)</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(115)</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(95)</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(95)</td>
+        </tr>
+
+        <!-- OPEX PERSONALE -->
+        <tr style="background:rgba(0,197,255,0.04);">
+          <td colspan="6" style="padding:10px 16px;font-family:'Space Mono',monospace;font-size:9px;color:var(--electric);letter-spacing:0.1em;border-bottom:1px solid var(--border);">OPEX — PERSONALE</td>
+        </tr>
+        <tr style="background:rgba(0,197,255,0.02);">
+          <td colspan="6" style="padding:6px 16px;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);font-style:italic;">CEO, CTO, CMO, CFO: RAL €50K (cost company €60K) fino al break-even · Dal Y3: CEO +20% vs C-suite a regime · Tutti + MIP (Management Incentive Plan)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">CEO / Founder — RAL €50K fino a BE (uguale C-suite), poi +20% vs C-suite a regime</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(60)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(60)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(240)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(288)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(384)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">CTO — RAL €50K fino a BE, poi a regime</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(60)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(60)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(200)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(240)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(320)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">CMO — RAL €50K fino a BE, poi a regime</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(60)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(60)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(200)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(240)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(320)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">CFO — RAL €50K fino a BE, poi a regime</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(60)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(60)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(200)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(240)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(320)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">Sales / Business Development (1→3)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(70)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(140)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(250)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(320)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(420)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">Operations / Customer Success (0→2)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">–</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(65)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(130)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(195)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(260)</td>
+        </tr>
+        <tr style="background:rgba(255,100,100,0.04);">
+          <td style="padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">TOTALE PERSONALE</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(310)</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(445)</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(1.220)</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(1.523)</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(2.024)</td>
+        </tr>
+
+        <!-- OPEX OTHER -->
+        <tr style="background:rgba(0,197,255,0.04);">
+          <td colspan="6" style="padding:10px 16px;font-family:'Space Mono',monospace;font-size:9px;color:var(--electric);letter-spacing:0.1em;border-bottom:1px solid var(--border);">OPEX — STRUTTURA & R&D</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">Infrastruttura cloud & SaaS tools</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(30)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(55)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(90)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(140)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(200)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">Marketing & acquisizione clienti</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(50)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(100)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(160)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(250)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(380)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">Legale, compliance, licenze pagamento</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(45)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(55)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(70)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(90)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(110)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">R&D geo-intelligence & AI</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(40)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(70)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(100)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(130)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(160)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);">Ufficio (full remote Y1-Y2, coworking Y3+)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">–</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">–</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(24)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(36)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.04);">(60)</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid var(--border);">Trasferte, eventi, partnership</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">(20)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">(35)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">(50)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">(70)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--white);border-bottom:1px solid var(--border);">(90)</td>
+        </tr>
+        <tr style="background:rgba(255,100,100,0.04);">
+          <td style="padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">TOTALE OPEX STRUTTURA</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(185)</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(315)</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(494)</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(716)</td>
+          <td style="text-align:right;padding:10px 16px;font-weight:600;color:#f97316;border-bottom:1px solid var(--border);">(1.000)</td>
+        </tr>
+
+        <!-- TOTALS -->
+        <tr style="background:rgba(0,197,255,0.04);">
+          <td style="padding:10px 16px;color:var(--muted);border-bottom:1px solid var(--border);">TOTALE COSTI (CapEx+Personale+OpEx)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--muted);border-bottom:1px solid var(--border);">(815)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--muted);border-bottom:1px solid var(--border);">(930)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--muted);border-bottom:1px solid var(--border);">(1.829)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--muted);border-bottom:1px solid var(--border);">(2.334)</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--muted);border-bottom:1px solid var(--border);">(3.119)</td>
+        </tr>
+
+        <!-- EBITDA -->
+        <tr style="background:rgba(139,255,71,0.06);">
+          <td style="padding:14px 16px;font-weight:700;color:var(--lime);font-family:'DM Serif Display',serif;font-size:15px;">EBITDA</td>
+          <td style="text-align:right;padding:14px 16px;font-weight:700;color:#f97316;font-size:15px;">(449)</td>
+          <td style="text-align:right;padding:14px 16px;font-weight:700;color:var(--lime);font-size:15px;">72</td>
+          <td style="text-align:right;padding:14px 16px;font-weight:700;color:var(--lime);font-size:15px;">382</td>
+          <td style="text-align:right;padding:14px 16px;font-weight:700;color:var(--lime);font-size:15px;">1.891</td>
+          <td style="text-align:right;padding:14px 16px;font-weight:700;color:var(--lime);font-size:15px;">4.405</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 16px;color:var(--muted);font-size:12px;">Margine EBITDA %</td>
+          <td style="text-align:right;padding:10px 16px;color:#f97316;font-size:12px;">n.m.</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--lime);font-size:12px;">7%</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--lime);font-size:12px;">17%</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--lime);font-size:12px;">45%</td>
+          <td style="text-align:right;padding:10px 16px;color:var(--lime);font-size:12px;">59%</td>
+        </tr>
+
+        <!-- CASH NEED -->
+        <tr style="background:rgba(0,197,255,0.04);">
+          <td style="padding:10px 16px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);">Fabbisogno seed stimato</td>
+          <td colspan="2" style="text-align:right;padding:10px 16px;color:var(--electric);font-weight:600;font-size:12px;border-top:1px solid var(--border);">€1,0–1,2M</td>
+          <td colspan="3" style="text-align:right;padding:10px 16px;color:var(--muted);font-size:11px;border-top:1px solid var(--border);">Copre Y1 completo + runway fino al break-even operativo in Y2 (2028)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EBITDA VISUAL -->
+  <div style="margin-top:40px;">
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--electric);letter-spacing:0.2em;margin-bottom:20px;">EBITDA PROGRESSION (€K)</div>
+    <div style="display:flex;align-items:flex-end;gap:16px;height:140px;">
+      <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+        <div style="width:100%;background:#f97316;border-radius:2px 2px 0 0;height:77px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:'Space Mono',monospace;font-size:9px;color:white;">(449)</span>
+        </div>
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:6px;">2027</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+        <div style="width:100%;background:var(--lime);border-radius:2px 2px 0 0;height:13px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:'Space Mono',monospace;font-size:8px;color:var(--navy);">72</span>
+        </div>
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:6px;">2028</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+        <div style="width:100%;background:var(--lime);border-radius:2px 2px 0 0;height:27px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--navy);">382</span>
+        </div>
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:6px;">2029</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+        <div style="width:100%;background:var(--lime);border-radius:2px 2px 0 0;height:78px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--navy);">1.891</span>
+        </div>
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:6px;">2030</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+        <div style="width:100%;background:var(--electric);border-radius:2px 2px 0 0;height:120px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:'Space Mono',monospace;font-size:9px;color:var(--navy);">4.405</span>
+        </div>
+        <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);margin-top:6px;">2031</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;font-size:11px;color:var(--muted);">Break-even EBITDA in Anno 2 (2028) · Margine 59% in Anno 5 (2031) · Fabbisogno seed €1,0–1,2M</div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-tag">05 — Roadmap</div>
+  <h2 class="section-title">Dalla validazione<br>alla leadership di mercato</h2>
+  <p class="section-intro">Un percorso con gate decisionali chiari. Il problem-solution fit è validato. Il contesto geopolitico rende il timing più urgente che mai.</p>
+
+  <div class="roadmap-timeline">
+    <div class="roadmap-step done">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-date">Q4 2024 – Q2 2026</div>
+      <h4>Validazione Concept, Business Model & BP</h4>
+      <p>Problem-solution fit validato. Flussi di ricavo definiti. TAM/SAM/SOM quantificati. Business plan completato. Modello commerciale testato con esperti di settore.</p>
+    </div>
+    <div class="roadmap-step active">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-date">Q2–Q3 2026 — Ora</div>
+      <h4>Accordo CPO Âncora & Real Estate Partner</h4>
+      <p>Ingaggio electrip come CPO âncora day-one. Accordo con grande property manager (Cushman & Wakefield, CBRE o simili) per pre-caricare centinaia di location al lancio. Definizione team fondatore e struttura societaria.</p>
+    </div>
+    <div class="roadmap-step future">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-date">Q4 2026</div>
+      <h4>Raccolta Seed & Avvio Sviluppo</h4>
+      <p>Closing round seed €1,0–1,2M. Avvio sviluppo MVP piattaforma. Onboarding C-suite (CTO, CMO, CFO). Contrattualistica standard ChargeBid redatta e validata legalmente.</p>
+    </div>
+    <div class="roadmap-step future">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-date">Q2 2027</div>
+      <h4>Lancio MVP — Mercato Secondario</h4>
+      <p>Prima release con letting CPO→OEM operativo. Ingaggio BYD e player asiatici con centinaia di location già disponibili. Primi deal chiusi e prime commissioni incassate tramite clearing house.</p>
+    </div>
+    <div class="roadmap-step future">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-date">Q3–Q4 2027</div>
+      <h4>Marketplace Primario & NPS System</h4>
+      <p>Lancio completo landlord→CPO. Primi CPO abbonati a €10K. Attivazione sistema NPS e rating proprietario. Primi dati di transazione reale che alimentano il moat competitivo.</p>
+    </div>
+    <div class="roadmap-step future">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-date">2028 — Break-even</div>
+      <h4>Break-even EBITDA & Series A</h4>
+      <p>Raggiungimento break-even operativo. Subscription a €20K (Y2 +100%). Compensazione C-suite a regime + attivazione MIP. Preparazione Series A per espansione EU.</p>
+    </div>
+    <div class="roadmap-step future">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-date">2028–2030</div>
+      <h4>Espansione EU & Scale</h4>
+      <p>Rollout progressivo: Germania + Francia (2028), Spagna + Paesi Bassi (2029), restante Europa (2030). Subscription a regime €25-40K. Target 50.000+ location attive. Revenue share clearing su scala EU.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:60px;padding:32px;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--lime);">
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--lime);letter-spacing:0.12em;margin-bottom:10px;">VISIONE 2030</div>
+    <div style="display:flex;gap:48px;flex-wrap:wrap;">
+      <div>
+        <div style="font-family:'DM Serif Display',serif;font-size:28px;color:var(--white)">50.000+</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Location di ricarica attive abbinate</div>
+      </div>
+      <div>
+        <div style="font-family:'DM Serif Display',serif;font-size:28px;color:var(--white)">100+</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Clienti CPO in tutta Europa</div>
+      </div>
+      <div>
+        <div style="font-family:'DM Serif Display',serif;font-size:28px;color:var(--white)">10+</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Paesi serviti</div>
+      </div>
+      <div>
+        <div style="font-family:'DM Serif Display',serif;font-size:28px;color:var(--white)">#1</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Marketplace EV infrastructure in Europa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="section-tag" style="display:inline-block;margin:0 auto 20px">06 — Partecipa</div>
+  <h2 class="section-title">Il momento è adesso.<br>La finestra non si riaprirà.</h2>
+  <p class="section-intro">Lo shock energetico del 2026 ha reso ChargeBid più rilevante che mai. Cerchiamo investitori seed con esperienza in marketplace B2B, infrastrutture EV, real estate tech o sicurezza energetica. La finestra per ingaggiare BYD e gli OEM asiatici è di 6-9 mesi.</p>
+
+  <div class="hero-cta" style="justify-content:center">
+    <a href="mailto:raffaella.calo@gmail.com" class="btn-primary">Richiedi un Incontro →</a>
+    <a href="#top" class="btn-ghost">Torna su</a>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-item">
+      <div class="contact-label">Fase</div>
+      <div class="contact-val">Raccolta Seed</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Mercati Iniziali</div>
+      <div class="contact-val">IT · DE · FR · NL · ES · PT</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Fondato</div>
+      <div class="contact-val">2025</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Fabbisogno Seed</div>
+      <div class="contact-val">€1,0 – 1,2M</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">charge<span>bid</span></div>
+  <div class="footer-note">Riservato — Solo per investitori qualificati — Aprile 2026</div>
+  <div class="footer-note" style="font-family:'Space Mono',monospace;font-size:11px;color:var(--electric)">Acceleriamo la rivoluzione EV in Europa</div>
+</footer>
+
+</body>
+</html>
